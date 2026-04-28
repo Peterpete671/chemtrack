@@ -33,6 +33,7 @@ entries = [
         "sample_name": "ACD-003-AK",
         "sample_type": "acid",
         "pH": "1.20",
+        "concentration": "0.100",
         "temperature": "25.00",
         "notes": "Sulfuric acid - Handle with care. Double checked concentration."
     },
