@@ -26,7 +26,7 @@ if df.empty:
 
 df['pH'] = pd.to_numeric(df['pH'])
 df['concentration'] = pd.to_numeric(df['concentration'])
-df['temperature'] = pd.to_numeric(df['recorded_at'])
+df['temperature'] = pd.to_numeric(df['temperature'], errors='coerce')
 df['recorded_at'] = pd.to_datetime(df['recorded_at'])
 df['date'] = df['recorded_at'].dt.date
 

@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import ChemicalSample
 from .serializers import ChemicalSampleSerializer
+from .analytics import AnalyticsService
 
 class SampleListCreateView(generics.ListCreateAPIView):
     """
@@ -63,6 +64,32 @@ class HealthCheckView(APIView):
         return Response({
             'status': 'ok',
             'system': 'CHEM-TRACK',
-            'week': 2,
-            'total_records': count
+            'week': 4,
+            'total_records': count,
+            'endpoints': [
+                '/api/samples/',
+                '/api/samples/<id>/',
+                '/api/summary/',
+                'api/anomalies/',
+            ]
         }, status=status.HTTP_200_OK)
+
+class SummaryView(APIView):
+    """
+    GET /api/summary
+    Returns dataset-wide and per-type statistical summary
+    Operates on the full dataset, no parameters needed.
+    """
+    def get(self, request):
+        data =AnalyticsService.get_summary()
+        return Response(data, status=status.HTTP_200_OK)
+    
+class AnomalyView(APIView):
+    """
+    GET /api/anomalies/
+    Returns all samples with at least one anomaly flag
+    Sorted by flag_count descending, most flagged samples first
+    """
+    def get(self, request):
+        data = AnalyticsService.get_anomalies()
+        return Response(data, status=status.HTTP_200_OK)

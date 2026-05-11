@@ -26,7 +26,7 @@ entries = [
         "sample_name": "ACD-002-AK",
         "sample_type": "acid",
         "pH": "3.75",
-        "concentration": "24.50",
+        "concentration": "18.00",
         "notes": "Acetic acid solution. Slight turbidity noted."
     },
     {

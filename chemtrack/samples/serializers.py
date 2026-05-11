@@ -41,6 +41,20 @@ class ChemicalSampleSerializer(serializers.ModelSerializer):
             )
         return value
     
+    def validate_sample_name(self, value):
+            value = value.strip()
+            if not value:
+                raise serializers.ValidationError("sample_name cannot be blank.")
+            return value
+    
+    def validate_notes(self, value):
+            if len(value) > 500:
+                raise serializers.ValidationError(
+                    f"Notes cannot exceed 500 characters. Got {len(value)}."
+                )
+            
+            return value
+    
     def validate(self, data):
         sample_type = data.get('sample_type')
         pH = data.get('pH')

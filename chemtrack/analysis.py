@@ -63,7 +63,7 @@ print("\n < 1.0 = consistent | > 2.0 = high variability, review needed")
 #INSIGHT 5: Temperature deviation flag
 #pH changes with temperature. Samples measured away from 25C standard may need correction before comparison.
 #Particularly relevant for buffers - phosphate buffer pH shifts - 0.003 units per degree Celcius
-print("|n[5] Temperature Deviation from Standard (25C)")
+print("\n[5] Temperature Deviation from Standard (25C)")
 print("-" * 40)
 df_temp = df.dropna(subset=["temperature"])
 non_std = df_temp[abs(df_temp['temperature'] - 25.0) > 2.0]
