@@ -12,12 +12,18 @@ PH_RANGES = {
 }
 
 class ChemicalSampleSerializer(serializers.ModelSerializer):
+    concentration_mol_L = serializers.SerializerMethodField()
+
+    def get_concentration_mol_L(self, obj):
+         """Explicit unit label for concentration to remove ambiguity"""
+         return float(obj.concentration)
+    
 
     class Meta:
         model = ChemicalSample
         fields = [
             'id', 'sample_name', 'sample_type', 'pH',
-            'concentration', 'temperature', 'notes', 'recorded_at'
+            'concentration', 'concentration_mol_L', 'temperature', 'notes', 'recorded_at'
         ]
         read_only_fields = ['id', 'recorded_at']
 
